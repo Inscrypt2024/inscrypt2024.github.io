@@ -68,7 +68,7 @@
         // 添加标注
         var marker = new BMapGL.Marker(point);
         // 点标记添加点击事件
-        var infoWindow = new BMapGL.InfoWindow('昆明玉龙湾湖景酒店', {width: 5, height: 30});
+        var infoWindow = new BMapGL.InfoWindow('昆明玉龙湾湖景酒店', {width: 0, height: 0});
         marker.addEventListener('click', function () {
             map.openInfoWindow(infoWindow, point);
         });
