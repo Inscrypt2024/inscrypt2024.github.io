@@ -55,24 +55,33 @@
         <div id="map"></div>
     </div>
 
-    <script type="text/javascript"
+<script type="text/javascript"
             src="https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=YERPiIMLQwclmvbO3ojsaxbMm5sIijpW"></script>
     <script type="text/javascript">
-        // 创建地图实例
-        var map = new BMapGL.Map("map");
-        // 设置中心点及缩放级别
-        var point = new BMapGL.Point(102.560501,24.910746);
-        map.centerAndZoom(point, 13);
-        // 启用鼠标滚轮缩放功能
-        map.enableScrollWheelZoom(true);
-        // 添加标注
-        var marker = new BMapGL.Marker(point);
-        // 点标记添加点击事件
-        var infoWindow = new BMapGL.InfoWindow('昆明玉龙湾湖景酒店', {width: 0, height: 0});
-        marker.addEventListener('click', function () {
-            map.openInfoWindow(infoWindow, point);
+        var map;
+        var mapInitialized = false;
+
+        function initMap() {
+            if (!mapInitialized) {
+                map = new BMapGL.Map("map");
+                var point = new BMapGL.Point(102.560501,24.910746);
+                map.centerAndZoom(point, 17);
+                map.enableScrollWheelZoom(true);
+                
+                var marker = new BMapGL.Marker(point);
+                var infoWindow = new BMapGL.InfoWindow('昆明玉龙湾湖景酒店', {width: 0, height: 0});
+                marker.addEventListener('click', function () {
+                    map.openInfoWindow(infoWindow, point);
+                });
+                map.addOverlay(marker);
+                
+                mapInitialized = true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(initMap, 500);
         });
-        map.addOverlay(marker);
     </script>
 </body>
 </html>
